@@ -1,0 +1,56 @@
+version: '3'
+services:
+  blog-service:
+    build:
+      context: ./blog-service  
+    ports:
+      - "8081:8080"  
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - db
+
+  comment-service:
+    build:
+      context: ./comment-service
+    ports:
+      - "8082:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - db
+
+  user-service:
+    build:
+      context: ./user-service 
+    ports:
+      - "8083:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - db
+
+  api-gateway:
+    build:
+      context: ./api-gateway  
+    ports:
+      - "8084:8080"
+    depends_on:
+      - blog-service
+      - comment-service
+      - user-service
+
+  frontend:
+    build:
+      context: ./frontend  
+    ports:
+      - "3000:3000"
+
+  db:
+    image: postgres
+    environment:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: 1234
+        PGDATA: /var/lib/postgresql/data
+    ports:
+      - "5432:5432"
