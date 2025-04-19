@@ -1,0 +1,9 @@
+[submodule "user-service"]
+	path = user-service
+	url = https://github.com/eylemabuzeyitoglu/UserService.git
+[submodule "comment-service"]
+	path = comment-service
+	url = https://github.com/eylemabuzeyitoglu/CommentService.git
+[submodule "blog-service"]
+	path = blog-service
+	url = https://github.com/eylemabuzeyitoglu/BlogService.git
