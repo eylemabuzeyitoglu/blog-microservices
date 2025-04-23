@@ -7,3 +7,6 @@
 [submodule "blog-service"]
 	path = blog-service
 	url = https://github.com/eylemabuzeyitoglu/BlogService.git
+[submodule "auth-service"]
+	path = auth-service
+	url = https://github.com/eylemabuzeyitoglu/AuthService.git
