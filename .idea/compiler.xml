@@ -7,7 +7,6 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="common-security" />
       </profile>
       <profile name="Annotation profile for Blog Microservice" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -17,17 +16,22 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
         </processorPath>
         <module name="BlogService" />
+        <module name="CommonSecurity" />
         <module name="CommentService" />
         <module name="UserService" />
         <module name="AuthService" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="common-security" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="AuthService" options="-parameters" />
       <module name="BlogService" options="-parameters" />
       <module name="CommentService" options="-parameters" />
+      <module name="CommonSecurity" options="-parameters" />
       <module name="UserService" options="-parameters" />
       <module name="common-security" options="-parameters" />
     </option>
