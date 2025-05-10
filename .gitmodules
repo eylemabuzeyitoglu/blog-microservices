@@ -13,3 +13,6 @@
 [submodule "common-security"]
 	path = common-security
 	url = https://github.com/eylemabuzeyitoglu/CommonSecurity
+[submodule "common"]
+	path = common
+	url = https://github.com/eylemabuzeyitoglu/Common.git
