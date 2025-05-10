@@ -13,7 +13,7 @@
         <module>blog-service</module>
         <module>user-service</module>
         <module>comment-service</module>
-        <module>common-security</module>
+        <module>common</module>
     </modules>
 
     <name>Blog Microservice</name>
