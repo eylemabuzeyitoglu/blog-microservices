@@ -12,7 +12,6 @@
     <modules>
         <module>blog-service</module>
         <module>user-service</module>
-        <module>comment-service</module>
         <module>common</module>
     </modules>
 

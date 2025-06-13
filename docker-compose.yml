@@ -10,15 +10,6 @@ services:
     depends_on:
       - db
 
-  comment-service:
-    build:
-      context: ./comment-service
-    ports:
-      - "8082:8080"
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-    depends_on:
-      - db
 
   user-service:
     build:
@@ -37,14 +28,8 @@ services:
       - "8084:8080"
     depends_on:
       - blog-service
-      - comment-service
       - user-service
 
-  frontend:
-    build:
-      context: ./frontend
-    ports:
-      - "3000:3000"
 
   db:
     image: postgres
@@ -63,6 +48,6 @@ services:
       - "8085:8080"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-      - JWT_SECRET=your_secret_key # Bu environment değişkenini gerekli gördüğünüz şekilde ayarlayın
+      - JWT_SECRET=your_secret_key
     depends_on:
       - db
