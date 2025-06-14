@@ -1,53 +1,54 @@
-version: '3'
 services:
+  auth-service:
+    build:
+      context: ./auth-service
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - JWT_SECRET=your_secret_key
+    depends_on:
+      db:
+        condition: service_healthy
+
   blog-service:
     build:
       context: ./blog-service
     ports:
       - "8081:8080"
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/blog_service
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=1234
     depends_on:
-      - db
-
+      db:
+        condition: service_healthy
 
   user-service:
     build:
       context: ./user-service
     ports:
-      - "8083:8080"
+      - "8082:8080"
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/user_service
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=1234
     depends_on:
-      - db
-
-  api-gateway:
-    build:
-      context: ./api-gateway
-    ports:
-      - "8084:8080"
-    depends_on:
-      - blog-service
-      - user-service
-
+      db:
+        condition: service_healthy
 
   db:
     image: postgres
     environment:
-        POSTGRES_USER: postgres
-        POSTGRES_PASSWORD: 1234
-        PGDATA: /var/lib/postgresql/data
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: postgres
     ports:
       - "5432:5432"
-
-
-  auth-service:
-    build:
-      context: ./auth-service
-    ports:
-      - "8085:8080"
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-      - JWT_SECRET=your_secret_key
-    depends_on:
-      - db
+    volumes:
+      - ./init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
