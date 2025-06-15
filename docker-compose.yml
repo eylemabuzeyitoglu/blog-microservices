@@ -28,9 +28,9 @@ services:
     build:
       context: ./user-service
     ports:
-      - "8082:8080"
+      - "8082:8082"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/user_service
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/user-service
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=1234
     depends_on:

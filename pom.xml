@@ -12,6 +12,7 @@
     <modules>
         <module>blog-service</module>
         <module>user-service</module>
+        <module>auth-service</module>
         <module>common</module>
     </modules>
 
